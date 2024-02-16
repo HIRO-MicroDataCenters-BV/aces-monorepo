@@ -12,11 +12,10 @@ The repository structure should look like this:
 |-- /microservice1
 |   |-- /app
 |   |   |-- __init__.py
-|   |   `-- main.py
-|   |
-|   |-- /tests
-|   |   |-- __init__.py
-|   |   `-- test_main.py
+|   |   |-- main.py
+|   |   `-- tests
+|   |       |-- __init__.py
+|   |       `-- test_main.py
 |   |
 |   |-- /charts
 |   |   `-- /app
@@ -28,11 +27,10 @@ The repository structure should look like this:
 |-- /microservice2
 |   |-- /app
 |   |   |-- __init__.py
-|   |   `-- main.py
-|   |
-|   |-- /tests
-|   |   |-- __init__.py
-|   |   `-- test_main.py
+|   |   |-- main.py
+|   |   `-- tests
+|   |       |-- __init__.py
+|   |       `-- test_main.py
 |   |
 |   |-- /charts
 |   |   `-- /app
@@ -47,3 +45,34 @@ The repository structure should look like this:
 
 
 </details>
+
+
+## Requirements
+Python 3.7+  
+
+## Installation
+If you don't have `pre-commit` installed run:
+
+```bash
+pip install pre-commit
+pre-commit install
+```
+
+## Add a new microservice
+1. Create a subdirectory at the root of the repository and copy the microservice's source code into it.
+2. Create a file .github/workflows/`<microservice-name>`.yaml to build, test and deploy your microservice.
+3. Add microservice hooks to the .pre-commit-config.yaml.
+4. Go to the microservice folder and install dependencies.
+5. Go back to the root of the repository and commit changes.
+
+## Working on a microservice
+1. Go to the microservice directory.
+2. Install dependencies:
+    ```bash
+    poetry config virtualenvs.in-project true
+    poetry install --no-root --with dev,test
+    ```
+3. Run the code, tests, etc. within the microservice environment:
+    ```bash
+    poetry run pytest
+    ```
